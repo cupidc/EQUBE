@@ -11,6 +11,7 @@ public class SelectOnClick : MonoBehaviour
     public Score score;
     public float hintTime;
     public UnityEvent<bool, Material> onHint;
+    public GameObject levelComplete;
 
     private GameObject _selectedObject;
     private GameObject _hitObject;
@@ -95,7 +96,8 @@ public class SelectOnClick : MonoBehaviour
         if (LevelComplete())
         {
             //print("Level complete");
-            SceneManager.LoadScene("LevelComplete");
+            levelComplete.SetActive(true);
+            //SceneManager.LoadScene("LevelComplete");
         }
                 
         // if selected colour is blank store current selected colour
@@ -133,6 +135,9 @@ public class SelectOnClick : MonoBehaviour
 
     bool LevelComplete()
     {
+        // cheat
+        if (Input.GetKey(KeyCode.G)) return true;
+
         bool complete = true;
         foreach (Material key in _manager.cube.ColourStats.Keys) {
             print(key + " : " + _manager.cube.ColourStats[key]);
